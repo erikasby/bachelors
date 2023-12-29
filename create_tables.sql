@@ -1,3 +1,7 @@
+-- Dropping Public Schema
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
+
 --
 -- PostgreSQL database dump
 --
@@ -809,3 +813,38 @@ ALTER TABLE ONLY public.users_bans
 -- PostgreSQL database dump complete
 --
 
+-- Default inserts
+INSERT INTO public.users (username, password, email, first_name, last_name, gender, created_at, updated_at, is_deleted, deleted_response, username_for_display, posts_count, follows_count, comments_count)
+VALUES ('rand_user86', '$2b$10$qeezTAK69RbrEIr5AfbkX.zsibl0skowvyb.HvjrkB18kqn3d0MFG', 'rand_user86@mail.com', null, null, null, '2023-12-28 14:09:46'::timestamp at time zone 'UTC', '2023-12-28 14:09:46'::timestamp at time zone 'UTC', false, null, 'rand_user86', 1, 0, 3);
+
+INSERT INTO public.communities (name, follows_count, posts_count, created_at, updated_at, is_deleted, deleted_response, comments_count, name_for_display)
+VALUES ('compsci', 1, 1, '2023-12-28 14:12:29'::timestamp at time zone 'UTC', '2023-12-28 14:12:29'::timestamp at time zone 'UTC', false, null, 3, 'compsci');
+
+INSERT INTO public.communities_accesses (community_id, user_id, can_ban_users, can_delete_comments, can_delete_posts, can_delete_community, can_update_community, created_at, updated_at, is_deleted, is_admin)
+VALUES (1, 1, true, true, true, true, true, '2023-12-28 14:12:29'::timestamp at time zone 'UTC', '2023-12-28 14:12:29'::timestamp at time zone 'UTC', false, true);
+
+INSERT INTO public.communities_posts (community_id, user_id, title, text, created_at, updated_at, is_deleted, deleted_response, votes_count, comments_count)
+VALUES (1, 1, 'AI Insights: A Glimpse into the Future', 'Intrigued by AI''s vast potential, I see it as a transformative force. Its ability to learn, adapt, and simulate human intelligence sparks curiosity. Ethical considerations loom large, raising questions about accountability. The blend of innovation and responsibility will define AI''s impact on society.', '2023-12-28 14:16:16'::timestamp at time zone 'UTC', '2023-12-28 14:16:16'::timestamp at time zone 'UTC', false, null, 0, 3);
+
+INSERT INTO public.communities_tags (post_id, name, created_at, updated_at, is_deleted)
+SELECT 1, 'AI', '2023-12-28 14:16:16'::timestamp at time zone 'UTC', '2023-12-28 14:16:16'::timestamp at time zone 'UTC', false UNION ALL
+SELECT 1, 'ArtificialIntelligence', '2023-12-28 14:16:16'::timestamp at time zone 'UTC', '2023-12-28 14:16:16'::timestamp at time zone 'UTC', false UNION ALL
+SELECT 1, 'TechInnovation', '2023-12-28 14:16:16'::timestamp at time zone 'UTC', '2023-12-28 14:16:16'::timestamp at time zone 'UTC', false UNION ALL
+SELECT 1, 'Ethics', '2023-12-28 14:16:16'::timestamp at time zone 'UTC', '2023-12-28 14:16:16'::timestamp at time zone 'UTC', false UNION ALL
+SELECT 1, 'FutureTech', '2023-12-28 14:16:16'::timestamp at time zone 'UTC', '2023-12-28 14:16:16'::timestamp at time zone 'UTC', false;
+
+INSERT INTO public.communities_follows (community_id, user_id, created_at, updated_at, is_deleted)
+VALUES (1, 1, '2023-12-28 14:12:29'::timestamp at time zone 'UTC', '2023-12-28 14:12:29'::timestamp at time zone 'UTC', false);
+
+INSERT INTO public.communities_bookmarks (post_id, user_id, created_at, updated_at, is_deleted)
+VALUES (1, 1, '2023-12-28 14:24:40'::timestamp at time zone 'UTC', '2023-12-28 14:24:40'::timestamp at time zone 'UTC', false);
+
+INSERT INTO public.communities_comments (post_id, user_id, replied_to_comment_id, text, votes_count, created_at, updated_at, is_deleted, deleted_response, depth, edited_text, parent_comment_id)
+SELECT 1, 1, 2, 'While AI presents incredible opportunities, the concern about job displacement is valid. It''s crucial for us to proactively address this challenge by fostering a workforce that complements AI. Moreover, maintaining the human touch in critical areas ensures a balanced integration, preserving the essence of human connection.', 1, '2023-12-28 14:19:00'::timestamp at time zone 'UTC', '2023-12-28 14:19:00'::timestamp at time zone 'UTC', false, null, 1, null, 2 UNION ALL
+SELECT 1, 1, null, 'I''m a bit skeptical about AI. The rapid advancements are impressive, but there''s a nagging concern about job displacement and loss of human touch. We need to ensure it serves humanity without compromising our values.', -1, '2023-12-28 14:18:02'::timestamp at time zone 'UTC', '2023-12-28 14:18:02'::timestamp at time zone 'UTC', false, null, 0, null, null UNION ALL
+SELECT 1, 1, null, 'Fascinating read! AI''s potential is thrilling, but we must tread carefully. Balancing innovation with ethical considerations is paramount. Exciting times ahead!', 1, '2023-12-28 14:17:40'::timestamp at time zone 'UTC', '2023-12-28 14:17:40'::timestamp at time zone 'UTC', false, null, 0, null, null;
+
+INSERT INTO public.communities_comments_votes (comment_id, user_id, sign, created_at, updated_at)
+SELECT 3, 1, 1, '2023-12-28 14:22:09'::timestamp at time zone 'UTC', '2023-12-28 14:22:09'::timestamp at time zone 'UTC' UNION ALL
+SELECT 2, 1, -1, '2023-12-28 14:22:08'::timestamp at time zone 'UTC', '2023-12-28 14:22:08'::timestamp at time zone 'UTC' UNION ALL
+SELECT 1, 1, 1, '2023-12-28 14:22:04'::timestamp at time zone 'UTC', '2023-12-28 14:22:04'::timestamp at time zone 'UTC';

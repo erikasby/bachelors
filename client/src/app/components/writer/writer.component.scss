@@ -1,4 +1,0 @@
-[contentEditable="true"]:empty:not(:focus):before {
-  content: attr(data-text);
-  color: rgb(115 115 115);
-}
