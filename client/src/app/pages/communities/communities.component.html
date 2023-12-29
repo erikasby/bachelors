@@ -1,0 +1,59 @@
+<app-response></app-response>
+<app-navbar></app-navbar>
+
+<!-- Sort -->
+<div class="flex justify-center">
+  <div class="flex flex-row items-center w-[48rem] mb-4 ml-2">
+    <select
+      (change)="sortByOrder($event)"
+      id="sort"
+      class="text-xs mr-1 bg-zinc-950 border-zinc-950 outline-zinc-950 active:border-zinc-950 focus:border-zinc-950 pr-1 ml-0 font-bold text-zinc-500 focus:outline-none"
+    >
+      <option class="text-zinc-500 font-semibold" value="top" selected>
+        Top
+      </option>
+      <option class="text-zinc-500 font-semibold" value="new">New</option>
+      <!-- <option class="text-zinc-500 font-semibold" value="hot">Hot</option> -->
+    </select>
+    <select
+      (change)="sortByScope($event)"
+      id="sort"
+      class="text-xs bg-zinc-950 border-zinc-950 outline-zinc-950 active:border-zinc-950 focus:border-zinc-950 pr-1 ml-0 font-bold text-zinc-500 focus:outline-none"
+    >
+      <option class="text-zinc-500 font-semibold" value="worldwide" selected>
+        Worldwide
+      </option>
+      <option class="text-zinc-500 font-semibold" value="following">
+        Following
+      </option>
+    </select>
+    <select
+      (change)="sortByDate($event)"
+      id="sort"
+      class="text-xs bg-zinc-950 border-zinc-950 outline-zinc-950 active:border-zinc-950 focus:border-zinc-950 pr-1 ml-0 font-bold text-zinc-500 focus:outline-none"
+    >
+      <option class="text-zinc-500 font-semibold" value="all" selected>
+        All time
+      </option>
+      <option class="text-zinc-500 font-semibold" value="year">1 year</option>
+      <option class="text-zinc-500 font-semibold" value="month">1 month</option>
+      <option class="text-zinc-500 font-semibold" value="week">1 week</option>
+      <option class="text-zinc-500 font-semibold" value="day">1 day</option>
+      <option class="text-zinc-500 font-semibold" value="hour">1 hour</option>
+    </select>
+  </div>
+</div>
+
+<div *ngIf="posts.length == 0" class="flex justify-center w-full">
+  <div class="flex max-w-[48rem] w-full justify-center">
+    <div class="flex">
+      <span class="text-zinc-200">No posts, currently.</span>
+    </div>
+  </div>
+</div>
+<app-card
+  *ngFor="let card of posts"
+  [card]="card"
+  [isInsideCommunity]="false"
+  class="mb-4 flex justify-center"
+></app-card>

@@ -1,0 +1,7 @@
+<app-navbar></app-navbar>
+<app-sort></app-sort>
+<app-card
+  *ngFor="let card of data"
+  [card]="card"
+  class="flex justify-center"
+></app-card>
