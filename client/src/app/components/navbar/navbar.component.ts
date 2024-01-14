@@ -31,6 +31,10 @@ export class NavbarComponent {
     this.initNavbar();
   }
 
+  toggleTheme() {
+    this.navbarService.toggleTheme();
+  }
+
   search() {
     const searchTerm = this.searchField.nativeElement.value.trim();
     this.router.navigate(['/search'], { queryParams: { for: searchTerm } });

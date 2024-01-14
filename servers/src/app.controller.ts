@@ -2912,6 +2912,18 @@ export class AppController {
           'where user_id = (select user_id from communities_posts where post_id = $1);';
         const values3 = [Number(req.body.postId)];
 
+        // const query4 =
+        //   'update communities ' +
+        //   'set comments_count = comments_count - (select count(*) from communities_comments where post_id = $1) ' +
+        //   'where community_id = (select community_id from communities_posts where post_id = $1);';
+        // const values4 = [Number(req.body.postId)];
+
+        // const query5 =
+        //   'update users ' +
+        //   'set comments_count = comments_count - (select count(*) from communities_comments where post_id = $1) ' +
+        //   'where user_id = (select user_id from communities_posts where post_id = $1);';
+        // const values5 = [Number(req.body.postId)];
+
         const dbResponse1 = await this.databaseService.query(query1, values1);
         let dbResponse2;
         if (dbResponse1)
@@ -2919,6 +2931,12 @@ export class AppController {
         let dbResponse3;
         if (dbResponse2)
           dbResponse3 = await this.databaseService.query(query3, values3);
+        // let dbResponse4;
+        // if (dbResponse3)
+        //   dbResponse4 = await this.databaseService.query(query4, values4);
+        // let dbResponse5;
+        // if (dbResponse4)
+        //   dbResponse5 = await this.databaseService.query(query5, values5);
         return { status: 'Success' };
       } else {
         return { status: 'User is not logged in' };

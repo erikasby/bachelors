@@ -17,6 +17,8 @@ export class NavbarService {
 
   private username: string = '';
 
+  private theme: string | null = localStorage.getItem('theme');
+
   getUsername(): string {
     return this.username;
   }
@@ -24,4 +26,18 @@ export class NavbarService {
   setUsername(username: string): void {
     this.username = username;
   }
+
+  toggleTheme(): string {
+    if (this.theme === 'light') {
+      localStorage.setItem('theme', 'dark');
+      this.theme = 'dark';
+      return 'dark';
+    } else {
+      localStorage.setItem('theme', 'light');
+      this.theme = 'light';
+      return 'light';
+    }
+  }
+
+  setTheme(value: string): void {}
 }

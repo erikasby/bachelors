@@ -121,7 +121,7 @@
     <div
       [ngClass]="isEditing || isRemoving ? 'hidden' : ''"
       *ngIf="!isComment"
-      class="flex mt-3"
+      class="flex flex-wrap mt-3"
     >
       <span
         *ngFor="let tag of card.tags"

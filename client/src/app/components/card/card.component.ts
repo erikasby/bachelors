@@ -1,5 +1,6 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { RequestService } from 'src/app/services/request.service';
+import { NavbarService } from '../navbar/navbar.service';
 
 interface Card {
   nameForDisplay: string;
